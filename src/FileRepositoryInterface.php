@@ -15,5 +15,5 @@ namespace Tsc\CatStorageSystem;
  */
 interface FileRepositoryInterface {
 
-    public function build();
+    public function build(DirectoryInterface $objDirectory, string $file);
 }

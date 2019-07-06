@@ -14,42 +14,33 @@ namespace Tsc\CatStorageSystem;
  * @author michael.hampton
  */
 class FileRepository implements FileRepositoryInterface {
-    
-    private $objDirectory;
-    
-    private $file;
 
     /**
-    * 
-    * @param \Tsc\CatStorageSystem\DirectoryInterface $objDirectory
-    */
-    public function __construct(DirectoryInterface $objDirectory, string $file) {
-        $this->objDirectory = $objDirectory;
-        $this->file = $file;
-    }
-    
-    /**
      * 
-     * @return \Tsc\CatStorageSystem\File
+     * @param \Tsc\CatStorageSystem\DirectoryInterface $objDirectory
+     * @param string $file
+     * @return boolean|\Tsc\CatStorageSystem\File
      */
-    public function build() {
-        
-        $filePath = $this->objDirectory->getPath() . '/' . $this->file;
-        
-        if(!is_file($filePath)) {
-            
+    public function build(DirectoryInterface $objDirectory, string $file) {
+
+        $filePath = $objDirectory->getPath() . '/' . $file;
+
+        if (!is_file($filePath))
+        {
+
             return false;
         }
-        
+
         $modified = \DateTime::createFromFormat('d/m/Y', date("d/m/Y", filemtime($filePath)));
         $size = filesize($filePath);
-                
+
         $objFile = new File();
-        $objFile->setParentDirectory($this->objDirectory);
+        $objFile->setParentDirectory($objDirectory);
         $objFile->setModifiedTime($modified);
-        $objFile->setName($this->file);
+        $objFile->setName($file);
         $objFile->setSize($size);
-        
+
         return $objFile;
     }
+
 }

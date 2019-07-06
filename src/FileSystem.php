@@ -26,6 +26,12 @@ class FileSystem implements FileSystemInterface {
     public function __construct(Config $objConfig) {
 
         $this->arrConfig = $objConfig->getConfig();
+
+        if (empty($this->arrConfig))
+        {
+
+            throw new Exception('Unable to get config');
+        }
     }
 
     /**
@@ -52,10 +58,8 @@ class FileSystem implements FileSystemInterface {
         }
 
         $path = $parent->getPath();
-        $fileName = $file->getName();
-        $objCurrentFile = $file->getParentDirectory();
-        $currentPath = $objCurrentFile->getPath() . '/' . $fileName;
-        $newPath = $path . '/' . $fileName;
+        $currentPath = $file->getPath();
+        $newPath = $path . '/' . $file->getName();
 
         if (!is_dir($path))
         {
@@ -95,7 +99,7 @@ class FileSystem implements FileSystemInterface {
             $this->arrErrors[] = 'Unable to update file';
             return false;
         }
-        
+
         return true;
     }
 
@@ -109,9 +113,8 @@ class FileSystem implements FileSystemInterface {
 
         $this->arrErrors = [];
         $objCurrentFile = $file->getParentDirectory();
-        $fileName = $file->getName();
         $currentPath = $objCurrentFile->getPath();
-        $fullPath = $currentPath . '/' . $fileName;
+        $fullPath = $file->getPath();
         $ext = $this->getFileExtension($file);
 
         $cleanString = $this->cleanString($newName);
@@ -237,7 +240,7 @@ class FileSystem implements FileSystemInterface {
 
         $directory_name = $this->cleanString($directory->getName());
         $new_directory = $current_path . '/' . $directory_name;
-        
+
         if (is_dir($new_directory))
         {
             $this->arrErrors[] = 'The directory you are trying to create already exists';
