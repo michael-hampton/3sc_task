@@ -1,0 +1,27 @@
+to run in the console enter
+php index.php (**METHOD NAME**)
+where **METHOD NAME** is the method from above followed by the arguments
+
+examples
+updateFile -  php index.php updateFile images marbles.gif (where images is the directory and marbles.gif is the filename)
+createDirectory  php index.php createDirectory images test_mike22 (where images is the parent directory and test_mike22 is the name of the new directory)
+getFiles - php index.php getFiles images (where images is the name of the directory to get the files from)
+getDirectories - php index.php getDirectories images (where images is the name of the directory to get the directories from)
+getDirectorySize - php index.php getDirectorySize images (where images is the directory you want to get the size of)
+getFileCount -  php index.php getFileCount images (where images is the name of the directory where to count the files)
+getDirectoryCount - php index.php getDirectoryCount images (where images is the directory to count the subdirectories from)
+renameDirectory - php index.php renameDirectory images/test_mike22 test_again (where images/test_mike22 is the directory you want to rename and test_again is the name you are changing it to)
+deleteDirectory - php index.php deleteDirectory images/test_again (where images/test_again is the directory you want to delete)
+createRootDirectory - php index.php createRootDirectory test_again (where test_again is the name of the directory you want to create)
+deleteFile - php index.php deleteFile images images.png (where images is the directory the file is in and images.png is the name of the file you want to delete)
+createFile - php index.php createFile images cat_1.gif images/test (where images is the name of the directory the file is currently in, cat_1.gif is the name of the file and images/test is the directory the file should be placed in)
+renameFile - php index.php renameFile images cat_1.gif cat_1a (where images is the directory the file is in cat_1.gif is the file to be renamed and cat_1a is the name the file should be changed to)
+
+
+given more time in order to adhere to full MVC I would probably add a controller and the console script would call the controller methods rather than calling them directly from the models. Could even use a framework :)
+
+
+
+
+
+
