@@ -12,17 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 $root = getcwd();
 
-require $root . '/src/Config.php';
-require $root . '/src/DirectoryRepositoryInterface.php';
-require $root . '/src/DirectoryRepository.php';
-require $root . '/src/FileRepositoryInterface.php';
-require $root . '/src/FileRepository.php';
-require $root . '/src/FileSystemInterface.php';
-require $root . '/src/DirectoryInterface.php';
-require $root . '/src/FileInterface.php';
-require $root . '/src/File.php';
-require $root . '/src/Directory.php';
-require $root . '/src/FileSystem.php';
+require $root . '/src/bootstrap.php';
 
 /**
  * Description of FileSystemTest
@@ -39,9 +29,9 @@ class FileSystemTest extends TestCase {
         parent::__construct($name, $data, $dataName);
 
         $objConfig = new Config();
-        $this->objFileRepository = new FileRepository();
+        $this->objFileRepository = new FileFactory();
         $this->objFileSystem = new FileSystem($objConfig);
-        $this->objDirectoryRepository = new DirectoryRepository();
+        $this->objDirectoryRepository = new DirectoryFactory();
     }
 
     public function test_update_file() {

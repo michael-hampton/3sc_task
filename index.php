@@ -1,24 +1,13 @@
 <?php
-
-require 'src/Config.php';
-require 'src/DirectoryRepositoryInterface.php';
-require 'src/DirectoryRepository.php';
-require 'src/FileRepositoryInterface.php';
-require 'src/FileRepository.php';
-require 'src/FileSystemInterface.php';
-require 'src/DirectoryInterface.php';
-require 'src/FileInterface.php';
-require 'src/File.php';
-require 'src/Directory.php';
-require 'src/FileSystem.php';
+require 'src/bootstrap.php';
 
 try {
     $objConfig = new \Tsc\CatStorageSystem\Config();
     $objFileSystem = new \Tsc\CatStorageSystem\FileSystem($objConfig);
-    $objDirectoryRepository = new Tsc\CatStorageSystem\DirectoryRepository();
-    $objFileRepository = new \Tsc\CatStorageSystem\FileRepository();
+    $objDirectoryRepository = new Tsc\CatStorageSystem\DirectoryFactory();
+    $objFileRepository = new \Tsc\CatStorageSystem\FileFactory();
 } catch (Exception $ex) {
-    die($ex);
+    die($ex->getMessage());
 }
 
 if (empty($argv) || empty($argv[1]))
@@ -91,7 +80,7 @@ switch ($method)
     case 'getDirectorySize':
         $size = $objFileSystem->getDirectorySize($objDirectory);
 
-        die('The directory size is ' . $size);
+        die('The directory size is ' . $size . ' bytes');
 
         break;
 
