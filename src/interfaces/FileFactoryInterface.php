@@ -9,17 +9,11 @@
 namespace Tsc\CatStorageSystem;
 
 /**
- * Description of RepositoryInterface
+ * Description of FileRepositoryInterface
  *
  * @author michael.hampton
  */
-interface DirectoryRepositoryInterface {
+interface FileFactoryInterface {
 
-    public function build(string $path);
-
-    /**
-     * 
-     * @param string $newName
-     */
-    public function createNewDirectory(string $newName): Directory;
+    public function build(DirectoryInterface $objDirectory, string $file);
 }

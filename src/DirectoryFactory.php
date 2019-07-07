@@ -13,7 +13,7 @@ namespace Tsc\CatStorageSystem;
  *
  * @author michael.hampton
  */
-class DirectoryRepository implements DirectoryRepositoryInterface {
+class DirectoryFactory implements DirectoryFactoryInterface {
 
     /**
      * 

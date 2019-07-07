@@ -94,6 +94,12 @@ class FileSystem implements FileSystemInterface {
         $this->arrErrors = [];
         $full_path = $file->getPath();
 
+        if (!is_file($full_path))
+        {
+            $this->arrErrors[] = 'You can only update a file';
+            return false;
+        }
+
         if (!touch($full_path))
         {
             $this->arrErrors[] = 'Unable to update file';
@@ -426,6 +432,18 @@ class FileSystem implements FileSystemInterface {
             $this->arrErrors[] = 'Unable to get directory';
             return false;
         }
+
+        $total_size = 0;
+        $di = new \RecursiveDirectoryIterator($directory_path);
+        foreach (new \RecursiveIteratorIterator($di) as $filename => $file)
+        {
+            if ($file->isFile())
+            {
+                $total_size += $file->getSize();
+            }
+        }
+
+        return $total_size; //in bytes
     }
 
     /**
